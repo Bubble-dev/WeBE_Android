@@ -40,7 +40,8 @@ public class CreateGroupFragment extends Fragment {
     private OnCreateGroupFragmentHandler handler;
 
     private static final int REQUEST_CAPTURING_PICTURE = 1;
-    private static final int REQUEST_CAPTURING_PICTURE_PERMISSION = 2;
+    private static final int REQUEST_GET_IMAGE_IN_GALLERY = 2;
+    private static final int REQUEST_CAPTURING_PICTURE_PERMISSION = 1;
 
     public static CreateGroupFragment newInstance() {
         return new CreateGroupFragment();
@@ -63,6 +64,13 @@ public class CreateGroupFragment extends Fragment {
                 requestCameraPermission();
             }
         });
+
+        setTitleImageWithGalleryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                requestGalleryPermission();
+            }
+        });
         return view;
     }
 
@@ -77,23 +85,50 @@ public class CreateGroupFragment extends Fragment {
         }
     }
 
-    public void sendTakePhotoIntent() {
+    private void requestGalleryPermission() {
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            if (!ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                Log.d(getClass().getName(), "갤러리 권한 요청 다신 보지않기");
+            }
+            requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_GET_IMAGE_IN_GALLERY);
+        } else {
+            sendGetImageInGallerayIntent();
+        }
+    }
+
+    private void sendTakePhotoIntent() {
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (cameraIntent.resolveActivity(getActivity().getPackageManager()) != null) {
             startActivityForResult(cameraIntent, REQUEST_CAPTURING_PICTURE);
         }
     }
 
+    private void sendGetImageInGallerayIntent() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+            startActivityForResult(intent, REQUEST_GET_IMAGE_IN_GALLERY);
+        }
+    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        Log.i("hi", "hi");
+        if (grantResults.length == 0)
+            return;
+
         switch (requestCode) {
             case REQUEST_CAPTURING_PICTURE_PERMISSION:
-                Log.i("Camera", "Not Granted");
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     sendTakePhotoIntent();
                 } else {
-                    Log.i("Camera", "Not Granted");
+                    Log.i(getClass().getName(), "Camera is not Granted");
+                }
+                break;
+
+            case REQUEST_GET_IMAGE_IN_GALLERY:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    sendGetImageInGallerayIntent();
+                } else {
+                    Log.i(getClass().getName(), "Gallery is not Granted");
                 }
                 break;
         }
@@ -101,11 +136,22 @@ public class CreateGroupFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_CAPTURING_PICTURE && resultCode == Activity.RESULT_OK) {
-            Bundle extra = data.getExtras();
-            Bitmap bitmap = (Bitmap) extra.get("data");
-            titleImageView.setImageBitmap(bitmap);
+        switch (requestCode) {
+            case REQUEST_CAPTURING_PICTURE:
+                if (resultCode == Activity.RESULT_OK) {
+                    Bundle extra = data.getExtras();
+                    Bitmap bitmap = (Bitmap) extra.get("data");
+                    titleImageView.setImageBitmap(bitmap);
+                }
+                break;
+
+            case REQUEST_GET_IMAGE_IN_GALLERY:
+                if (resultCode == Activity.RESULT_OK) {
+                    titleImageView.setImageURI(data.getData());
+                }
+                break;
         }
+
     }
 
     @Override
