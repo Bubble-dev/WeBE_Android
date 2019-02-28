@@ -2,7 +2,6 @@ package com.example.dongkyoo.webe.createGroup;
 
 import android.Manifest;
 import android.app.Activity;
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
@@ -40,7 +39,8 @@ public class CreateGroupFragment extends Fragment {
     private CreateGroupViewModel viewModel;
     private OnCreateGroupFragmentHandler handler;
 
-    private static final int REQUEST_CAPTURING_PICTURE_CODE = 1;
+    private static final int REQUEST_CAPTURING_PICTURE = 1;
+    private static final int REQUEST_CAPTURING_PICTURE_PERMISSION = 2;
 
     public static CreateGroupFragment newInstance() {
         return new CreateGroupFragment();
@@ -68,24 +68,32 @@ public class CreateGroupFragment extends Fragment {
 
     private void requestCameraPermission() {
         if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.CAMERA)) {
-                Log.i("??", "??");
-            } else {
-                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, REQUEST_CAPTURING_PICTURE_CODE);
+            if (!ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.CAMERA)) {
+                Log.d(getClass().getName(), "카메라 권한 요청 다신 보이지 않기");
             }
+            requestPermissions(new String[]{Manifest.permission.CAMERA}, REQUEST_CAPTURING_PICTURE_PERMISSION);
         } else {
-            Intent cameraIntent = new Intent();
+            sendTakePhotoIntent();
+        }
+    }
+
+    public void sendTakePhotoIntent() {
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (cameraIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+            startActivityForResult(cameraIntent, REQUEST_CAPTURING_PICTURE);
         }
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        Log.i("hi", "hi");
         switch (requestCode) {
-            case REQUEST_CAPTURING_PICTURE_CODE:
+            case REQUEST_CAPTURING_PICTURE_PERMISSION:
+                Log.i("Camera", "Not Granted");
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
+                    sendTakePhotoIntent();
                 } else {
-
+                    Log.i("Camera", "Not Granted");
                 }
                 break;
         }
@@ -93,7 +101,7 @@ public class CreateGroupFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_CAPTURING_PICTURE_CODE && resultCode == Activity.RESULT_OK) {
+        if (requestCode == REQUEST_CAPTURING_PICTURE && resultCode == Activity.RESULT_OK) {
             Bundle extra = data.getExtras();
             Bitmap bitmap = (Bitmap) extra.get("data");
             titleImageView.setImageBitmap(bitmap);
