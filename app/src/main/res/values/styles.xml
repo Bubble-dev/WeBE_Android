@@ -1,0 +1,101 @@
+<resources>
+
+    <style name="NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+    </style>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primaryDark</item>
+        <item name="colorAccent">@color/accent</item>
+        <item name="colorControlNormal">@color/white</item>
+        <item name="actionMenuTextColor">@color/white</item>
+        <item name="android:actionMenuTextColor">@color/white</item>
+    </style>
+
+    <!--<style name="text_h1">-->
+        <!--<item name="android:fontFamily">sans-serif-condensed</item>-->
+        <!--<item name="android:textStyle">normal</item>-->
+        <!--<item name="android:textSize">@dimen/font_h1</item>-->
+        <!--<item name="android:letterSpacing">-1.5</item>-->
+    <!--</style>-->
+
+    <!--<style name="text_h2">-->
+        <!--<item name="android:fontFamily">sans-serif-condensed</item>-->
+        <!--<item name="android:textStyle">normal</item>-->
+        <!--<item name="android:textSize">@dimen/font_h2</item>-->
+        <!--<item name="android:letterSpacing">-0.5</item>-->
+    <!--</style>-->
+
+    <!--<style name="text_h3">-->
+        <!--<item name="android:fontFamily">sans-serif</item>-->
+        <!--<item name="android:textStyle">normal</item>-->
+        <!--<item name="android:textSize">@dimen/font_h3</item>-->
+        <!--<item name="android:letterSpacing">0</item>-->
+    <!--</style>-->
+
+    <!--<style name="text_h4">-->
+        <!--<item name="android:fontFamily">sans-serif</item>-->
+        <!--<item name="android:textStyle">normal</item>-->
+        <!--<item name="android:textSize">@dimen/font_h4</item>-->
+        <!--<item name="android:letterSpacing">0.25</item>-->
+    <!--</style>-->
+
+    <!--<style name="text_h5">-->
+        <!--<item name="android:fontFamily">sans-serif</item>-->
+        <!--<item name="android:textStyle">normal</item>-->
+        <!--<item name="android:textSize">@dimen/font_h5</item>-->
+        <!--<item name="android:letterSpacing">0</item>-->
+    <!--</style>-->
+
+    <!--<style name="text_h6">-->
+        <!--<item name="android:fontFamily">sans-serif</item>-->
+        <!--<item name="android:textStyle">normal|bold</item>-->
+        <!--<item name="android:textSize">@dimen/font_h6</item>-->
+        <!--<item name="android:letterSpacing">0.15</item>-->
+    <!--</style>-->
+
+    <!--<style name="text_subtitle1">-->
+        <!--<item name="android:fontFamily">sans-serif</item>-->
+        <!--<item name="android:textStyle">normal</item>-->
+        <!--<item name="android:textSize">@dimen/font_subtitle1</item>-->
+        <!--<item name="android:letterSpacing">0.15</item>-->
+    <!--</style>-->
+
+    <!--<style name="text_subtitle2">-->
+        <!--<item name="android:fontFamily">sans-serif</item>-->
+        <!--<item name="android:textStyle">normal|bold</item>-->
+        <!--<item name="android:textSize">@dimen/font_subtitle2</item>-->
+        <!--<item name="android:letterSpacing">0.1</item>-->
+    <!--</style>-->
+
+    <!--<style name="text_body1">-->
+        <!--<item name="android:fontFamily">sans-serif</item>-->
+        <!--<item name="android:textStyle">normal</item>-->
+        <!--<item name="android:textSize">@dimen/font_body1</item>-->
+        <!--<item name="android:letterSpacing">0.5</item>-->
+    <!--</style>-->
+
+    <!--<style name="text_body2">-->
+        <!--<item name="android:fontFamily">sans-serif</item>-->
+        <!--<item name="android:textStyle">normal</item>-->
+        <!--<item name="android:textSize">@dimen/font_body2</item>-->
+        <!--<item name="android:letterSpacing">0.25</item>-->
+    <!--</style>-->
+
+    <!--<style name="text_button">-->
+        <!--<item name="android:fontFamily">sans-serif</item>-->
+        <!--<item name="android:textStyle">normal|bold</item>-->
+        <!--<item name="android:textSize">@dimen/font_button</item>-->
+        <!--<item name="android:letterSpacing">1.25</item>-->
+    <!--</style>-->
+
+    <!--<style name="text_caption">-->
+        <!--<item name="android:fontFamily">sans-serif</item>-->
+        <!--<item name="android:textStyle">normal</item>-->
+        <!--<item name="android:textSize">@dimen/font_caption</item>-->
+        <!--<item name="android:letterSpacing">0.4</item>-->
+    <!--</style>-->
+
+</resources>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/list_item_small_height"
+    android:orientation="horizontal"
+    android:layout_marginLeft="@dimen/margin"
+    android:layout_marginRight="@dimen/margin">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/recent_schedule_item_image"
+        android:layout_width="@dimen/img_circle_size"
+        android:layout_height="@dimen/img_circle_size"
+        android:src="@color/textPrimary"
+        android:layout_marginRight="@dimen/margin"/>
+
+    <TextView
+        android:id="@+id/recent_schedule_item_group"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:gravity="left|center_vertical"
+        style="@style/TextAppearance.MaterialComponents.Body1"
+        android:text="토트넘"/>
+
+    <TextView
+        android:id="@+id/recent_schedule_item_content"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        android:gravity="left|center_vertical"
+        style="@style/TextAppearance.MaterialComponents.Body2"
+        android:text="토트넘vs맨유"/>
+
+    <TextView
+        android:id="@+id/recent_schedule_item_date"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="left|center_vertical"
+        android:textSize="@dimen/font_body2"
+        style="@style/TextAppearance.MaterialComponents.Caption"
+        android:text="2019.02.28"/>
+
+</LinearLayout>
