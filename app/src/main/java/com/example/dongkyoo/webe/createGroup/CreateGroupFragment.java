@@ -92,7 +92,7 @@ public class CreateGroupFragment extends Fragment {
             }
             requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_GET_IMAGE_IN_GALLERY);
         } else {
-            sendGetImageInGallerayIntent();
+            sendGetImageInGalleryIntent();
         }
     }
 
@@ -103,7 +103,7 @@ public class CreateGroupFragment extends Fragment {
         }
     }
 
-    private void sendGetImageInGallerayIntent() {
+    private void sendGetImageInGalleryIntent() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
             startActivityForResult(intent, REQUEST_GET_IMAGE_IN_GALLERY);
@@ -126,7 +126,7 @@ public class CreateGroupFragment extends Fragment {
 
             case REQUEST_GET_IMAGE_IN_GALLERY:
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    sendGetImageInGallerayIntent();
+                    sendGetImageInGalleryIntent();
                 } else {
                     Log.i(getClass().getName(), "Gallery is not Granted");
                 }
@@ -166,13 +166,13 @@ public class CreateGroupFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();
-        inflater.inflate(R.menu.menu_add_group, menu);
+        inflater.inflate(R.menu.menu_create_group, menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_add_group_save:
+            case R.id.menu_create_group_save:
                 // TODO: Success 신호는 바꿔야함
                 if (nameEditText.getText().toString().equals(""))
                     nameEditText.setError(getActivity().getResources().getString(R.string.require_group_name));

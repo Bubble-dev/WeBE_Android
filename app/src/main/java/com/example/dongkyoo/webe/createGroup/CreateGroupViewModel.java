@@ -17,4 +17,15 @@ public class CreateGroupViewModel extends ViewModel {
     public LiveData<Group> getGroup() {
         return new MutableLiveData<>();
     }
+
+    public boolean isDuplicatedName(String name) {
+        // TODO: 서버 처리 필수!
+        if (name.equals(getDuplicateName()))
+            return true;
+        return false;
+    }
+
+    public String getDuplicateName() {
+        return "duplicate";
+    }
 }
