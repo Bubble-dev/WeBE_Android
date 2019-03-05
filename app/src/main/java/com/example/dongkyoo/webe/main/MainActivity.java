@@ -1,26 +1,23 @@
 package com.example.dongkyoo.webe.main;
 
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 
 import com.example.dongkyoo.webe.R;
-import com.example.dongkyoo.webe.createGroup.CreateGroupFragment;
 import com.example.dongkyoo.webe.calendar.CalendarFragment;
+import com.example.dongkyoo.webe.createGroup.CreateGroupFragment;
 import com.example.dongkyoo.webe.group.GroupFragment;
 import com.example.dongkyoo.webe.setting.SettingFragment;
 import com.example.dongkyoo.webe.vos.Group;
+import com.google.android.material.tabs.TabLayout;
 
-import java.util.ArrayList;
-import java.util.List;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager.widget.ViewPager;
 
 public class MainActivity extends AppCompatActivity implements GroupFragment.OnGroupFragmentHandler, CreateGroupFragment.OnCreateGroupFragmentHandler {
 

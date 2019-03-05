@@ -1,15 +1,13 @@
 package com.example.dongkyoo.webe.main;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.util.Log;
 
 import com.example.dongkyoo.webe.calendar.CalendarFragment;
-import com.example.dongkyoo.webe.setting.SettingFragment;
 import com.example.dongkyoo.webe.group.GroupFragment;
+import com.example.dongkyoo.webe.setting.SettingFragment;
 
-import java.util.List;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 
 public class MainViewPagerAdapter extends FragmentStatePagerAdapter {
 
