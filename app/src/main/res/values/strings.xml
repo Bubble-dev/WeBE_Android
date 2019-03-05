@@ -17,6 +17,7 @@
 
     <string name="require_group_name">그룹이름을 입력하세요</string>
     <string name="duplicated_group_name">이미 사용중인 그룹명입니다</string>
+    <string name="create_group_successfully">그룹 생성 완료</string>
 
     <string name="error">임의의 에러 메세지</string>
 </resources>

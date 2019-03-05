@@ -1,26 +1,23 @@
 package com.example.dongkyoo.webe.main;
 
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 
 import com.example.dongkyoo.webe.R;
-import com.example.dongkyoo.webe.createGroup.CreateGroupFragment;
 import com.example.dongkyoo.webe.calendar.CalendarFragment;
+import com.example.dongkyoo.webe.createGroup.CreateGroupFragment;
 import com.example.dongkyoo.webe.group.GroupFragment;
 import com.example.dongkyoo.webe.setting.SettingFragment;
 import com.example.dongkyoo.webe.vos.Group;
+import com.google.android.material.tabs.TabLayout;
 
-import java.util.ArrayList;
-import java.util.List;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager.widget.ViewPager;
 
 public class MainActivity extends AppCompatActivity implements GroupFragment.OnGroupFragmentHandler, CreateGroupFragment.OnCreateGroupFragmentHandler {
 
@@ -71,20 +68,26 @@ public class MainActivity extends AppCompatActivity implements GroupFragment.OnG
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        MenuItem search = menu.findItem(R.id.main_menu_search);
-        SearchView searchView = (SearchView) search.getActionView();
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                return false;
-            }
+        menu.clear();
 
-            @Override
-            public boolean onQueryTextChange(String s) {
-                return false;
-            }
-        });
+        if (screenState == ScreenState.CREATE_GROUP) {
+            getMenuInflater().inflate(R.menu.menu_create_group, menu);
+        } else if (screenState == ScreenState.MAIN) {
+            getMenuInflater().inflate(R.menu.menu_main, menu);
+            MenuItem search = menu.findItem(R.id.main_menu_search);
+            SearchView searchView = (SearchView) search.getActionView();
+            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String s) {
+                    return false;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String s) {
+                    return false;
+                }
+            });
+        }
 
         return true;
     }
@@ -109,6 +112,8 @@ public class MainActivity extends AppCompatActivity implements GroupFragment.OnG
         tabLayout.setVisibility(View.GONE);
         viewPager.setVisibility(View.GONE);
         screenState = ScreenState.CREATE_GROUP;
+
+        invalidateOptionsMenu();
     }
 
     @Override

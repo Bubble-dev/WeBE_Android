@@ -1,18 +1,15 @@
 package com.example.dongkyoo.webe.calendar;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModel;
-import android.support.annotation.Nullable;
-
 import com.example.dongkyoo.webe.vos.Group;
 import com.example.dongkyoo.webe.vos.Schedule;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
 public class CalendarViewModel extends ViewModel {
 
