@@ -179,7 +179,10 @@ public class CreateGroupFragment extends Fragment {
 
                 // 그룹저장 서버 요청
                 Group newGroup = viewModel.saveNewGroup();
-                if (newGroup != null) handler.onCreateNewGroup(newGroup);
+                if (newGroup != null) {
+                    handler.onCreateNewGroup(newGroup);
+                    Snackbar.make(getView(), R.string.create_group_successfully, Snackbar.LENGTH_SHORT).show();
+                }
                 else Snackbar.make(getView(), R.string.error, Snackbar.LENGTH_SHORT).show();
                 return true;
         }

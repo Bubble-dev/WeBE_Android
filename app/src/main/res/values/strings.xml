@@ -17,4 +17,7 @@
     <string name="save">저장</string>
 
     <string name="error">임의의 에러 메세지</string>
+
+    <string name="create_group_successfully">그룹 생성 완료</string>
+    <string name="duplicated_group_name">그룹명 중복</string>
 </resources>

@@ -91,7 +91,12 @@ public class MainActivity extends AppCompatActivity implements GroupFragment.OnG
         switch (item.getItemId()) {
             case R.id.main_menu_search:
                 return true;
+
+            case android.R.id.home:
+                onBackPressed();
+                return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -106,6 +111,21 @@ public class MainActivity extends AppCompatActivity implements GroupFragment.OnG
         tabLayout.setVisibility(View.GONE);
         viewPager.setVisibility(View.GONE);
         screenState = ScreenState.CREATE_GROUP;
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        switch (screenState) {
+            case CREATE_GROUP:
+                getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+
+                fragmentContainer.setVisibility(View.GONE);
+                tabLayout.setVisibility(View.VISIBLE);
+                viewPager.setVisibility(View.VISIBLE);
+                screenState = ScreenState.MAIN;
+                break;
+        }
     }
 
     @Override

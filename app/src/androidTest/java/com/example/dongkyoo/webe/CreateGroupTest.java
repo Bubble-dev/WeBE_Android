@@ -3,11 +3,13 @@ package com.example.dongkyoo.webe;
 import com.example.dongkyoo.webe.createGroup.CreateGroupViewModel;
 import com.example.dongkyoo.webe.main.MainActivity;
 
+import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import androidx.test.espresso.action.ViewActions;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
@@ -108,5 +110,12 @@ public class CreateGroupTest {
                 .perform(click());
 
         TestUtil.checkIsDisplayingSnackbar(TestUtil.getStringResource(R.string.create_group_successfully));
+    }
+
+    // 뒤로가기 키
+    @Test
+    public void backKeyPressed() {
+        onView(isRoot()).perform(ViewActions.pressBack());
+        onView(withId(R.id.activity_main_fragmentContainer)).check(matches(Matchers.not(isDisplayed())));
     }
 }
