@@ -12,6 +12,7 @@
         <item name="colorControlNormal">@color/white</item>
         <item name="actionMenuTextColor">@color/white</item>
         <item name="android:actionMenuTextColor">@color/white</item>
+        <item name="colorControlHighlight">@color/accent</item>
     </style>
 
     <!--<style name="text_h1">-->

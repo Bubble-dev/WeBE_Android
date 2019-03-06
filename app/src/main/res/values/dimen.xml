@@ -2,10 +2,14 @@
 <resources>
     <dimen name="img_circle_size">48dp</dimen>
     <dimen name="img_small">24dp</dimen>
-    <dimen name="list_item_small_height">48dp</dimen>
+    <dimen name="icon_small">18dp</dimen>
+    <dimen name="list_item_height">48dp</dimen>
+    <dimen name="list_item_small_height">36dp</dimen>
 
     <dimen name="margin_s">4dp</dimen>
     <dimen name="margin">16dp</dimen>
+    <dimen name="margin_l">24dp</dimen>
+    <dimen name="margin_xl">32dp</dimen>
 
     <dimen name="padding">16dp</dimen>
     <dimen name="padding_s">4dp</dimen>

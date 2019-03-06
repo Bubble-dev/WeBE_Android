@@ -3,6 +3,7 @@
     <color name="background">#FAFAFA</color>
     <color name="primary">#5D8FEF</color>
     <color name="primaryDark">#353F50</color>
+    <color name="iconGray">#999999</color>
     <color name="accent">#C9523B</color>
     <color name="textPrimary">#EEEEEE</color>
     <color name="textGray">#CCCCCC</color>
