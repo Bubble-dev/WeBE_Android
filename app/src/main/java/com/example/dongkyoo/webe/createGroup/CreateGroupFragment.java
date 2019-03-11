@@ -18,10 +18,13 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.example.dongkyoo.webe.Network;
 import com.example.dongkyoo.webe.R;
 import com.example.dongkyoo.webe.vos.Group;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
+
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -92,7 +95,7 @@ public class CreateGroupFragment extends Fragment {
             }
             requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_GET_IMAGE_IN_GALLERY);
         } else {
-            sendGetImageInGallerayIntent();
+            sendGetImageInGalleryIntent();
         }
     }
 
@@ -103,7 +106,7 @@ public class CreateGroupFragment extends Fragment {
         }
     }
 
-    private void sendGetImageInGallerayIntent() {
+    private void sendGetImageInGalleryIntent() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
             startActivityForResult(intent, REQUEST_GET_IMAGE_IN_GALLERY);
@@ -126,7 +129,7 @@ public class CreateGroupFragment extends Fragment {
 
             case REQUEST_GET_IMAGE_IN_GALLERY:
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    sendGetImageInGallerayIntent();
+                    sendGetImageInGalleryIntent();
                 } else {
                     Log.i(getClass().getName(), "Gallery is not Granted");
                 }
@@ -174,16 +177,26 @@ public class CreateGroupFragment extends Fragment {
         switch (item.getItemId()) {
             case R.id.menu_create_group_save:
                 // TODO: Success 신호는 바꿔야함
-                if (nameEditText.getText().toString().equals(""))
+                if (nameEditText.getText().toString().equals("")) {
                     nameEditText.setError(getActivity().getResources().getString(R.string.require_group_name));
+                    return false;
+                }
 
                 // 그룹저장 서버 요청
-                Group newGroup = viewModel.saveNewGroup();
-                if (newGroup != null) {
-                    handler.onCreateNewGroup(newGroup);
-                    Snackbar.make(getView(), R.string.create_group_successfully, Snackbar.LENGTH_SHORT).show();
-                }
-                else Snackbar.make(getView(), R.string.error, Snackbar.LENGTH_SHORT).show();
+                viewModel.saveNewGroup(new Network.OnNetworkProcessListener() {
+                    @Override
+                    public void onSuccess(List<Object> resultList) {
+                        Group group = (Group) resultList.get(0);
+                        handler.onCreateNewGroup(group);
+
+                        Snackbar.make(getView(), R.string.create_group_successfully, Snackbar.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure() {
+                        Snackbar.make(getView(), R.string.error, Snackbar.LENGTH_SHORT).show();
+                    }
+                });
                 return true;
         }
         return super.onOptionsItemSelected(item);
