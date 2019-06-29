@@ -18,13 +18,14 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
-import com.example.dongkyoo.webe.Network;
+import com.example.dongkyoo.webe.network.Network;
 import com.example.dongkyoo.webe.R;
 import com.example.dongkyoo.webe.vos.Group;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,6 +33,10 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CreateGroupFragment extends Fragment {
 
@@ -183,17 +188,29 @@ public class CreateGroupFragment extends Fragment {
                 }
 
                 // 그룹저장 서버 요청
-                viewModel.saveNewGroup(new Network.OnNetworkProcessListener() {
+                viewModel.createNewGroup(new Callback<Group>() {
                     @Override
-                    public void onSuccess(List<Object> resultList) {
-                        Group group = (Group) resultList.get(0);
+                    public void onResponse(Call<Group> call, Response<Group> response) {
+                        if (response.code() != 200) {
+                            try {
+                                Log.e(CreateGroupFragment.this.getClass().getName(), response.errorBody().string());
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            this.onFailure(call, new Exception());
+                            return;
+                        }
+
+                        Group group = response.body();
                         handler.onCreateNewGroup(group);
 
                         Snackbar.make(getView(), R.string.create_group_successfully, Snackbar.LENGTH_SHORT).show();
                     }
 
                     @Override
-                    public void onFailure() {
+                    public void onFailure(Call<Group> call, Throwable t) {
+                        t.printStackTrace();
+
                         Snackbar.make(getView(), R.string.error, Snackbar.LENGTH_SHORT).show();
                     }
                 });
