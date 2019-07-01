@@ -1,14 +1,23 @@
 <resources>
     <string name="app_name">WeBE</string>
     <string name="input_id_hint">아이디</string>
+    <string name="input_name_hint">이름</string>
     <string name="input_pw_hint">비밀번호</string>
+    <string name="input_password_confirm_hint">비밀번호 확인</string>
+    <string name="input_email_hint">이메일</string>
     <string name="login">로그인</string>
     <string name="signUp">회원가입</string>
     <string name="findIdPw">아이디/비밀번호 찾기</string>
+
     <string name="require_id">아이디를 입력하세요</string>
     <string name="require_pw">비밀번호를 입력하세요</string>
+    <string name="require_same_password_and_confirm">두 비밀번호가 일치하지 않습니다.</string>
+    <string name="require_name">이름을 입력하세요</string>
+    <string name="require_email">이메일을 입력하세요</string>
+    <string name="require_valid_email">이메일 형식을 확인하세요</string>
     <string name="require_longer_pw">8자리 이상의 비밀번호를 입력하세요</string>
     <string name="require_group_name">그룹이름을 입력하세요</string>
+
     <string name="recent_schedule">최근 일정</string>
     <string name="please_report_error_of_schedule">잘못된 정보 발견 시 정보오류정정 신청 부탁드립니다</string>
     <string name="recommending_subscribe">구독하면 일정을 실시간으로 공유 받을 수 있습니다</string>
@@ -20,4 +29,6 @@
 
     <string name="create_group_successfully">그룹 생성 완료</string>
     <string name="duplicated_group_name">그룹명 중복</string>
+
+    <string name="sign_up">회원가입</string>
 </resources>
